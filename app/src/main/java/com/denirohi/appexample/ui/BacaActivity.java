@@ -21,11 +21,12 @@ import timber.log.Timber;
  * Created by derohimat on 05/03/16.
  */
 public class BacaActivity extends BaseActivity {
-    @Bind(R.id.view_pager) ViewPager pager;
+    @Bind(R.id.view_pager)
+    ViewPager pager;
 
     @Override
     protected int getResourceLayout() {
-        return R.layout.activity_second;
+        return R.layout.activity_baca;
     }
 
     @Override
@@ -48,6 +49,5 @@ public class BacaActivity extends BaseActivity {
 
         pager.setAdapter(new BacaPagerAdapter(getSupportFragmentManager(), fragments));
         pager.setCurrentItem(pos);
-
     }
 }

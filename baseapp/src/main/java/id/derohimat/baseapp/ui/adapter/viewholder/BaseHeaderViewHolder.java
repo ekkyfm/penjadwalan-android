@@ -12,11 +12,11 @@ import android.view.View;
  * LinkedIn   : https://www.linkedin.com/in/derohimat
  */
 public abstract class BaseHeaderViewHolder extends BaseItemViewHolder {
-    protected Bundle bundle;
+    protected Bundle mBundle;
 
     public BaseHeaderViewHolder(View itemView, Bundle bundle) {
         super(itemView, null, null);
-        this.bundle = bundle;
+        this.mBundle = bundle;
     }
 
     @Override
@@ -27,6 +27,6 @@ public abstract class BaseHeaderViewHolder extends BaseItemViewHolder {
     public abstract void show();
 
     public void saveState(Bundle bundle) {
-        this.bundle = bundle;
+        this.mBundle = bundle;
     }
 }

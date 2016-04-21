@@ -32,10 +32,10 @@ public class BeritaPresenter extends BasePresenter<BeritaPresenter.View> {
                 .compose(BaseScheduler.pluck().applySchedulers(BaseScheduler.Type.IO))
                 .subscribe(listBerita -> {
                     this.listBerita = listBerita;
-                    view.showListBerita(listBerita);
+                    mView.showListBerita(listBerita);
                 }, throwable -> {
                     Timber.d(throwable.getMessage());
-                    view.showError(throwable);
+                    mView.showError(throwable);
                 });
     }
 
@@ -46,10 +46,10 @@ public class BeritaPresenter extends BasePresenter<BeritaPresenter.View> {
                 .compose(BaseScheduler.pluck().applySchedulers(BaseScheduler.Type.IO))
                 .subscribe(berita -> {
                     this.berita = berita;
-                    view.showBerita(berita);
+                    mView.showBerita(berita);
                 }, throwable -> {
                     Timber.d(throwable.getMessage());
-                    view.showError(throwable);
+                    mView.showError(throwable);
                 });
     }
 
@@ -67,7 +67,7 @@ public class BeritaPresenter extends BasePresenter<BeritaPresenter.View> {
                 .doInComputation(this::doThing)
                 .subscribe(o -> {
                     Timber.d(o.toString());
-                    view.showSomeThing();
+                    mView.showSomeThing();
                 }, throwable -> Timber.d(throwable.getMessage()));
     }
 
@@ -81,16 +81,16 @@ public class BeritaPresenter extends BasePresenter<BeritaPresenter.View> {
     public void loadState(Bundle bundle) {
         listBerita = bundle.getParcelableArrayList("listBerita");
         if (listBerita != null) {
-            view.showListBerita(listBerita);
+            mView.showListBerita(listBerita);
         } else {
-            view.showError(new Throwable("Error"));
+            mView.showError(new Throwable("Error"));
         }
 
         berita = bundle.getParcelable("berita");
         if (berita != null) {
-            view.showBerita(berita);
+            mView.showBerita(berita);
         } else {
-            view.showError(new Throwable("Error"));
+            mView.showError(new Throwable("Error"));
         }
     }
 

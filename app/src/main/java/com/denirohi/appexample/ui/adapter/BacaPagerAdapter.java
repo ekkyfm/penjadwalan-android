@@ -18,6 +18,6 @@ public class BacaPagerAdapter extends BasePagerAdapter<BacaFragment> {
 
     @Override
     public BacaFragment getItem(int position) {
-        return fragments.get(position);
+        return mFragments.get(position);
     }
 }

@@ -18,7 +18,7 @@ public class MyPagerAdapter extends BasePagerAdapter<MyFragment> {
 
     @Override
     public MyFragment getItem(int position) {
-        fragments.get(position).setData("This is fragment " + (position + 1));
-        return fragments.get(position);
+        mFragments.get(position).setData("This is fragment " + (position + 1));
+        return mFragments.get(position);
     }
 }

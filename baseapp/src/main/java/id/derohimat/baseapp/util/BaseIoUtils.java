@@ -96,7 +96,7 @@ public final class BaseIoUtils {
 	}
 
 	/**
-	 * Reads all data from stream and close it silently
+	 * Reads all mDatas from stream and close it silently
 	 *
 	 * @param is Input stream
 	 */

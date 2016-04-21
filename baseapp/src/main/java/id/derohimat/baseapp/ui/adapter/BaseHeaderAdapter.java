@@ -23,15 +23,15 @@ public abstract class BaseHeaderAdapter<Data, ViewHolder extends BaseItemViewHol
         BaseRecyclerAdapter<Data, BaseItemViewHolder> {
     protected static final int TYPE_HEADER = 0;
     protected static final int TYPE_ITEM = 1;
-    protected boolean hasHeader = true;
-    protected Header header;
-    protected Bundle bundle;
+    protected boolean mHasHeader = true;
+    protected Header mHeader;
+    protected Bundle mBundle;
 
     public BaseHeaderAdapter(Context context, Bundle bundle) {
         super(context);
-        this.bundle = bundle;
-        if (hasHeader) {
-            data.add(null);
+        this.mBundle = bundle;
+        if (mHasHeader) {
+            mDatas.add(null);
         }
     }
 
@@ -50,9 +50,9 @@ public abstract class BaseHeaderAdapter<Data, ViewHolder extends BaseItemViewHol
 
     @Override
     public BaseItemViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        if (hasHeader && viewType == TYPE_HEADER) {
-            header = onCreateHeaderViewHolder(viewGroup, viewType);
-            return header;
+        if (mHasHeader && viewType == TYPE_HEADER) {
+            mHeader = onCreateHeaderViewHolder(viewGroup, viewType);
+            return mHeader;
         }
 
         return onCreateItemViewHolder(viewGroup, viewType);
@@ -64,18 +64,18 @@ public abstract class BaseHeaderAdapter<Data, ViewHolder extends BaseItemViewHol
 
     @Override
     public void onBindViewHolder(BaseItemViewHolder holder, int position) {
-        if (hasHeader && position == 0) {
-            header.show();
+        if (mHasHeader && position == 0) {
+            mHeader.show();
             return;
         }
-        holder.setHasHeader(hasHeader);
+        holder.setHasHeader(mHasHeader);
         super.onBindViewHolder(holder, position);
     }
 
 
     @Override
     public int getItemViewType(int position) {
-        if (position == 0 && hasHeader) {
+        if (position == 0 && mHasHeader) {
             return TYPE_HEADER;
         } else {
             return TYPE_ITEM;
@@ -83,44 +83,44 @@ public abstract class BaseHeaderAdapter<Data, ViewHolder extends BaseItemViewHol
     }
 
     public void showHeader() {
-        if (!hasHeader) {
-            hasHeader = true;
-            data.add(0, null);
+        if (!mHasHeader) {
+            mHasHeader = true;
+            mDatas.add(0, null);
         }
     }
 
     public void hideHeader() {
-        if (hasHeader) {
-            hasHeader = false;
-            data.remove(0);
+        if (mHasHeader) {
+            mHasHeader = false;
+            mDatas.remove(0);
         }
     }
 
     public boolean isHasHeader() {
-        return hasHeader;
+        return mHasHeader;
     }
 
     @Override
     public void clear() {
         super.clear();
-        if (hasHeader) {
-            data.add(null);
+        if (mHasHeader) {
+            mDatas.add(null);
         }
     }
 
     @Override
-    public List<Data> getData() {
-        return hasHeader ? new ArrayList<>(data.subList(1, data.size())) : super.getData();
+    public List<Data> getDatas() {
+        return mHasHeader ? new ArrayList<>(mDatas.subList(1, mDatas.size())) : super.getDatas();
     }
 
     public Header getHeader() {
-        return header;
+        return mHeader;
     }
 
     @Override
     public void add(Data item, int position) {
-        if (hasHeader) {
-            data.add(position + 1, item);
+        if (mHasHeader) {
+            mDatas.add(position + 1, item);
             notifyItemInserted(position + 1);
         } else {
             super.add(item, position);
@@ -129,8 +129,8 @@ public abstract class BaseHeaderAdapter<Data, ViewHolder extends BaseItemViewHol
 
     @Override
     public void remove(int position) {
-        if (hasHeader) {
-            data.remove(position + 1);
+        if (mHasHeader) {
+            mDatas.remove(position + 1);
             notifyItemRemoved(position + 1);
         } else {
             super.remove(position);

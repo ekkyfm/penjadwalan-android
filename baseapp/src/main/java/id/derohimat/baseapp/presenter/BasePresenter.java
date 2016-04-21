@@ -13,10 +13,10 @@ import timber.log.Timber;
  * LinkedIn   : https://www.linkedin.com/in/derohimat
  */
 public abstract class BasePresenter<V extends BasePresenter.View> {
-    protected V view;
+    protected V mView;
 
     public BasePresenter(V view) {
-        this.view = view;
+        this.mView = view;
         Timber.tag(getClass().getSimpleName());
     }
 
@@ -27,7 +27,7 @@ public abstract class BasePresenter<V extends BasePresenter.View> {
     public interface View {
         void showError(Throwable error);
 
-        void showLoading();
+        void showLoading(boolean isRefresh);
 
         void dismissLoading();
     }

@@ -1,7 +1,6 @@
 package com.denirohi.appexample.data.api;
 
 import com.denirohi.appexample.data.model.Berita;
-import com.denirohi.appexample.data.model.Cuaca;
 
 import java.util.List;
 
@@ -37,11 +36,5 @@ public enum TaniPediaService {
 
         @GET("/berita")
         Observable<Berita> getBerita(@Query("url") String url);
-
-        @GET("/cuaca")
-        Observable<List<Cuaca>> getCuaca(@Query("lat") double lat, @Query("lon") double lon);
-
-        @GET("/cuaca")
-        Observable<List<Cuaca>> getCuaca();
     }
 }

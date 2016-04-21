@@ -3,11 +3,11 @@ apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '23.0.2'
+    buildToolsVersion '23.0.3'
 
     defaultConfig {
         applicationId "com.denirohi.appexample"
-        minSdkVersion 15
+        minSdkVersion 17
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -29,7 +29,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'me.tatarka:gradle-retrolambda:3.2.3'
+        classpath 'me.tatarka:gradle-retrolambda:3.2.5'
     }
 }
 
@@ -44,5 +44,5 @@ retrolambda {
 dependencies {
     compile project(':baseapp')
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:2.0.6'
+    retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:2.1.0'
 }

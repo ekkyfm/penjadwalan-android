@@ -19,21 +19,21 @@ import timber.log.Timber;
 public abstract class BasePagerAdapter<Fragment extends BaseFragment> extends
         FragmentStatePagerAdapter
 {
-    protected List<Fragment> fragments;
-    protected List<String> titles;
+    protected List<Fragment> mFragments;
+    protected List<String> mTitles;
 
     public BasePagerAdapter(FragmentManager fm, List<Fragment> fragments)
     {
         super(fm);
-        this.fragments = fragments;
+        this.mFragments = fragments;
         Timber.tag(getClass().getSimpleName());
     }
 
     public BasePagerAdapter(FragmentManager fm, List<Fragment> fragments, List<String> titles)
     {
         super(fm);
-        this.fragments = fragments;
-        this.titles = titles;
+        this.mFragments = fragments;
+        this.mTitles = titles;
         Timber.tag(getClass().getSimpleName());
     }
 
@@ -43,32 +43,32 @@ public abstract class BasePagerAdapter<Fragment extends BaseFragment> extends
     @Override
     public int getCount()
     {
-        return fragments.size();
+        return mFragments.size();
     }
 
     public List<Fragment> getFragments()
     {
-        return fragments;
+        return mFragments;
     }
 
     public void setFragments(List<Fragment> fragments)
     {
-        this.fragments = fragments;
+        this.mFragments = fragments;
     }
 
     public List<String> getTitles()
     {
-        return titles;
+        return mTitles;
     }
 
     public void setTitles(List<String> titles)
     {
-        this.titles = titles;
+        this.mTitles = titles;
     }
 
     @Override
     public CharSequence getPageTitle(int position)
     {
-        return titles.size() == fragments.size() ? titles.get(position) : super.getPageTitle(position);
+        return mTitles.size() == mFragments.size() ? mTitles.get(position) : super.getPageTitle(position);
     }
 }

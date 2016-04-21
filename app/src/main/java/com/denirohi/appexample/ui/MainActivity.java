@@ -12,6 +12,7 @@ import com.denirohi.appexample.R;
 import com.denirohi.appexample.data.model.Berita;
 import com.denirohi.appexample.presenter.BeritaPresenter;
 import com.denirohi.appexample.ui.adapter.BeritaRecyclerAdapter;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.trello.rxlifecycle.ActivityEvent;
 
 import java.util.ArrayList;
@@ -30,7 +31,8 @@ import timber.log.Timber;
 public class MainActivity extends BaseActivity implements BeritaPresenter.View {
 
     private BeritaPresenter beritaPresenter;
-    @Bind(R.id.recycler_view) BaseRecyclerView recyclerView;
+    @Bind(R.id.recycler_view)
+    BaseRecyclerView recyclerView;
     private BeritaRecyclerAdapter adapter;
 
     @Override
@@ -49,16 +51,15 @@ public class MainActivity extends BaseActivity implements BeritaPresenter.View {
         setUpRecyclerView();
         setUpController(savedInstanceState);
 
-        beritaPresenter.doSomeThing();
-
-        doSomeDummyThread();
+//        beritaPresenter.doSomeThing();
+//        doSomeDummyThread();
     }
 
     private void setUpAdapter() {
         adapter = new BeritaRecyclerAdapter(this);
         adapter.setOnItemClickListener((view, position) -> {
             Intent intent = new Intent(this, BacaActivity.class);
-            intent.putParcelableArrayListExtra("data", (ArrayList<Berita>) adapter.getData());
+            intent.putParcelableArrayListExtra("data", (ArrayList<Berita>) adapter.getDatas());
             intent.putExtra("pos", position);
             startActivity(intent);
         });
@@ -68,6 +69,19 @@ public class MainActivity extends BaseActivity implements BeritaPresenter.View {
     private void setUpRecyclerView() {
         recyclerView.setUpAsList();
         recyclerView.setAdapter(adapter);
+
+        //for disable load more
+        recyclerView.setLoadingMoreEnabled(false);
+        recyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                beritaPresenter.loadListBerita();
+            }
+
+            @Override
+            public void onLoadMore() {
+            }
+        });
     }
 
     private void setUpController(Bundle bundle) {
@@ -124,6 +138,8 @@ public class MainActivity extends BaseActivity implements BeritaPresenter.View {
 
     @Override
     public void showListBerita(List<Berita> listBerita) {
+        recyclerView.refreshComplete();
+        adapter.clear();
         adapter.add(listBerita);
     }
 
@@ -144,7 +160,7 @@ public class MainActivity extends BaseActivity implements BeritaPresenter.View {
     }
 
     @Override
-    public void showLoading() {
+    public void showLoading(boolean isRefresh) {
 
     }
 

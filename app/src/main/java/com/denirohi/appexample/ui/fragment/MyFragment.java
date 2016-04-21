@@ -14,11 +14,12 @@ import id.derohimat.baseapp.ui.fragment.BaseFragment;
  */
 public class MyFragment extends BaseFragment {
     private String data;
-    @Bind(R.id.text) TextView textView;
+    @Bind(R.id.text)
+    TextView textView;
 
     @Override
     protected int getResourceLayout() {
-        return R.layout.fragment_my;
+        return R.layout.fragment_baca;
     }
 
     public void setData(String data) {

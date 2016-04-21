@@ -1,5 +1,6 @@
 package id.derohimat.baseapp.ui.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
@@ -8,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.trello.rxlifecycle.components.support.RxFragment;
 
@@ -24,7 +26,9 @@ import timber.log.Timber;
  * LinkedIn   : https://www.linkedin.com/in/derohimat
  */
 public abstract class BaseFragment<Data extends Parcelable> extends RxFragment {
-    protected Data data;
+    protected Context mContext;
+    protected Data mData;
+    protected LayoutInflater mInflater;
 
     public BaseFragment() {
 
@@ -34,12 +38,14 @@ public abstract class BaseFragment<Data extends Parcelable> extends RxFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Timber.tag(getClass().getSimpleName());
+        mContext = getActivity();
+        mInflater = LayoutInflater.from(getActivity());
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = LayoutInflater.from(getActivity()).inflate(getResourceLayout(), container, false);
+        View view = mInflater.inflate(getResourceLayout(), container, false);
         ButterKnife.bind(this, view);
         return view;
     }
@@ -48,17 +54,17 @@ public abstract class BaseFragment<Data extends Parcelable> extends RxFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (savedInstanceState != null) {
-            data = savedInstanceState.getParcelable("data");
+            mData = savedInstanceState.getParcelable("mDatas");
         }
         onViewReady(savedInstanceState);
     }
 
     public void setData(Data data) {
-        this.data = data;
+        this.mData = data;
     }
 
     public Data getData() {
-        return data;
+        return mData;
     }
 
     protected abstract int getResourceLayout();
@@ -67,7 +73,7 @@ public abstract class BaseFragment<Data extends Parcelable> extends RxFragment {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putParcelable("data", data);
+        outState.putParcelable("mDatas", mData);
         super.onSaveInstanceState(outState);
     }
 
@@ -79,7 +85,7 @@ public abstract class BaseFragment<Data extends Parcelable> extends RxFragment {
 
     @Override
     public void onDestroy() {
-        data = null;
+        mData = null;
         super.onDestroy();
     }
 
@@ -108,6 +114,10 @@ public abstract class BaseFragment<Data extends Parcelable> extends RxFragment {
                     .setTransitionStyle(transitionStyle)
                     .commit();
         }
+    }
+
+    protected void showToast(String message) {
+        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
     }
 
     protected ActionBar getSupportActionBar() {

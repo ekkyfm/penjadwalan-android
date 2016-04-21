@@ -5,6 +5,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
+
 /**
  * Created on : 05-03-2016
  * Author     : derohimat
@@ -13,12 +15,13 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
  * GitHub     : https://github.com/derohimat
  * LinkedIn   : https://www.linkedin.com/in/derohimat
  */
-public abstract class BaseRecyclerListener extends RecyclerView.OnScrollListener {
+@Deprecated
+public abstract class BaseRecyclerListener extends XRecyclerView.OnScrollListener {
     private int previousTotal = 0;
     private boolean loading = true;
     private int visibleThreshold = 3;
     private int firstVisibleItem;
-    private int visibleItemCount;
+//    private int visibleItemCount;
     private int totalItemCount;
     private int currentPage = 0;
     private LinearLayoutManager linearLayoutManager;
@@ -56,7 +59,7 @@ public abstract class BaseRecyclerListener extends RecyclerView.OnScrollListener
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
 
-        visibleItemCount = recyclerView.getChildCount();
+        int visibleItemCount = recyclerView.getChildCount();
         if (linearLayoutManager != null) {
             totalItemCount = linearLayoutManager.getItemCount();
             firstVisibleItem = linearLayoutManager.findFirstVisibleItemPosition();

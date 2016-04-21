@@ -14,7 +14,7 @@ import android.preference.PreferenceManager;
  */
 public class BasePreferenceUtils {
 
-    private static SharedPreferences getSharedPreference(Context context) {
+    public static SharedPreferences getSharedPreference(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context);
     }
 
@@ -52,5 +52,9 @@ public class BasePreferenceUtils {
 
     public static boolean getBoolean(Context context, String key) {
         return getSharedPreference(context).getBoolean(key, false);
+    }
+
+    public static void clear(Context context) {
+        getSharedPreference(context).edit().clear().apply();
     }
 }

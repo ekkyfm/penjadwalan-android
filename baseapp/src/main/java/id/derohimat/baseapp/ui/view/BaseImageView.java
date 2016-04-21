@@ -20,7 +20,7 @@ import com.bumptech.glide.request.target.Target;
  * LinkedIn   : https://www.linkedin.com/in/derohimat
  */
 public class BaseImageView extends ImageView {
-    private String imageUrl;
+    private String mImageUrl;
 
     public BaseImageView(Context context) {
         super(context);
@@ -35,14 +35,14 @@ public class BaseImageView extends ImageView {
     }
 
     public void setImageUrl(String url) {
-        imageUrl = url;
+        mImageUrl = url;
         Glide.with(getContext())
                 .load(url)
                 .into(this);
     }
 
     public void setImageUrl(String url, int errorResourceId) {
-        imageUrl = url;
+        mImageUrl = url;
         Glide.with(getContext())
                 .load(url)
                 .error(errorResourceId)
@@ -50,7 +50,7 @@ public class BaseImageView extends ImageView {
     }
 
     public void setImageUrl(String url, int placeHolderResourceId, int errorResourceId) {
-        imageUrl = url;
+        mImageUrl = url;
         Glide.with(getContext())
                 .load(url)
                 .placeholder(placeHolderResourceId)
@@ -59,7 +59,7 @@ public class BaseImageView extends ImageView {
     }
 
     public void setImageUrl(String url, int placeHolderDrawable, Drawable errorDrawable) {
-        imageUrl = url;
+        mImageUrl = url;
         Glide.with(getContext())
                 .load(url)
                 .placeholder(placeHolderDrawable)
@@ -68,7 +68,7 @@ public class BaseImageView extends ImageView {
     }
 
     public void setImageUrl(String url, final ProgressBar progressBar) {
-        imageUrl = url;
+        mImageUrl = url;
         progressBar.setVisibility(VISIBLE);
         Glide.with(getContext())
                 .load(url)
@@ -89,7 +89,7 @@ public class BaseImageView extends ImageView {
     }
 
     public void setImageUrl(String url, final ProgressBar progressBar, int errorResourceId) {
-        imageUrl = url;
+        mImageUrl = url;
         progressBar.setVisibility(VISIBLE);
         Glide.with(getContext())
                 .load(url)
@@ -111,7 +111,7 @@ public class BaseImageView extends ImageView {
     }
 
     public void setImageUrl(String url, final ProgressBar progressBar, Drawable errorDrawable) {
-        imageUrl = url;
+        mImageUrl = url;
         progressBar.setVisibility(VISIBLE);
         Glide.with(getContext())
                 .load(url)
@@ -133,6 +133,6 @@ public class BaseImageView extends ImageView {
     }
 
     public String getImageUrl() {
-        return imageUrl;
+        return mImageUrl;
     }
 }

@@ -20,16 +20,16 @@ import static id.derohimat.baseapp.ui.adapter.BaseRecyclerAdapter.OnLongItemClic
 public abstract class BaseItemViewHolder<Data> extends RecyclerView.ViewHolder implements
         View.OnClickListener,
         View.OnLongClickListener {
-    private OnItemClickListener itemClickListener;
-    private OnLongItemClickListener longItemClickListener;
-    private boolean hasHeader = false;
+    private OnItemClickListener mItemClickListener;
+    private OnLongItemClickListener mLongItemClickListener;
+    private boolean mHasHeader = false;
 
     public BaseItemViewHolder(View itemView, OnItemClickListener itemClickListener, OnLongItemClickListener longItemClickListener) {
         super(itemView);
         ButterKnife.bind(this, itemView);
         Timber.tag(getClass().getSimpleName());
-        this.itemClickListener = itemClickListener;
-        this.longItemClickListener = longItemClickListener;
+        this.mItemClickListener = itemClickListener;
+        this.mLongItemClickListener = longItemClickListener;
         itemView.setOnClickListener(this);
         itemView.setOnLongClickListener(this);
     }
@@ -37,24 +37,24 @@ public abstract class BaseItemViewHolder<Data> extends RecyclerView.ViewHolder i
     public abstract void bind(Data data);
 
     public boolean isHasHeader() {
-        return hasHeader;
+        return mHasHeader;
     }
 
     public void setHasHeader(boolean hasHeader) {
-        this.hasHeader = hasHeader;
+        this.mHasHeader = hasHeader;
     }
 
     @Override
     public void onClick(View v) {
-        if (itemClickListener != null) {
-            itemClickListener.onItemClick(v, hasHeader ? getAdapterPosition() - 1 : getAdapterPosition());
+        if (mItemClickListener != null) {
+            mItemClickListener.onItemClick(v, mHasHeader ? getAdapterPosition() - 1 : getAdapterPosition());
         }
     }
 
     @Override
     public boolean onLongClick(View v) {
-        if (longItemClickListener != null) {
-            longItemClickListener.onLongItemClick(v, hasHeader ? getAdapterPosition() - 1 : getAdapterPosition());
+        if (mLongItemClickListener != null) {
+            mLongItemClickListener.onLongItemClick(v, mHasHeader ? getAdapterPosition() - 1 : getAdapterPosition());
             return true;
         }
         return false;

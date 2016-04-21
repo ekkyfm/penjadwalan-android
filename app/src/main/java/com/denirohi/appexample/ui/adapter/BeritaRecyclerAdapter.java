@@ -40,6 +40,6 @@ public class BeritaRecyclerAdapter extends BaseRecyclerAdapter<Berita, BeritaHol
 
     @Override
     public BeritaHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new BeritaHolder(getView(parent, viewType), itemClickListener, longItemClickListener);
+        return new BeritaHolder(getView(parent, viewType), mItemClickListener, mLongItemClickListener);
     }
 }

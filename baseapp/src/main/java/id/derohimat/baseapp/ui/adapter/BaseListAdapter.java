@@ -25,25 +25,27 @@ import timber.log.Timber;
 public abstract class BaseListAdapter<Data, Holder extends BaseListViewHolder> extends
         BaseAdapter {
     public static String PAGE = "BaseListAdapter.Page";
-    protected Context context;
-    protected List<Data> data;
+    protected Context mContext;
+    protected LayoutInflater mInflater;
+    protected List<Data> mDatas;
 
     public BaseListAdapter(Context context) {
-        this.context = context;
-        data = new ArrayList<>();
+        this.mContext = context;
+        mDatas = new ArrayList<>();
         Timber.tag(getClass().getSimpleName());
     }
 
     public BaseListAdapter(Context context, List<Data> data) {
-        this.context = context;
-        this.data = data;
+        this.mContext = context;
+        this.mDatas = data;
+        this.mInflater = LayoutInflater.from(mContext);
         Timber.tag(getClass().getSimpleName());
     }
 
     @Override
     public int getCount() {
         try {
-            return data.size();
+            return mDatas.size();
         } catch (Exception e) {
             return 0;
         }
@@ -51,7 +53,7 @@ public abstract class BaseListAdapter<Data, Holder extends BaseListViewHolder> e
 
     @Override
     public Data getItem(int position) {
-        return data.get(position);
+        return mDatas.get(position);
     }
 
     @Override
@@ -63,14 +65,14 @@ public abstract class BaseListAdapter<Data, Holder extends BaseListViewHolder> e
     public View getView(int position, View itemView, ViewGroup parent) {
         Holder holder;
         if (itemView == null) {
-            itemView = LayoutInflater.from(context).inflate(getItemView(), parent, false);
+            itemView = LayoutInflater.from(mContext).inflate(getItemView(), parent, false);
             holder = onCreateViewHolder(itemView);
             itemView.setTag(holder);
         } else {
             holder = (Holder) itemView.getTag();
         }
 
-        holder.bind(data.get(position));
+        holder.bind(mDatas.get(position));
 
         return itemView;
     }
@@ -79,17 +81,17 @@ public abstract class BaseListAdapter<Data, Holder extends BaseListViewHolder> e
 
     public abstract Holder onCreateViewHolder(View itemView);
 
-    public List<Data> getData() {
-        return data;
+    public List<Data> getDatas() {
+        return mDatas;
     }
 
     public void add(Data item) {
-        data.add(item);
+        mDatas.add(item);
         notifyDataSetChanged();
     }
 
     public void add(Data item, int position) {
-        data.add(position, item);
+        mDatas.add(position, item);
         notifyDataSetChanged();
     }
 
@@ -100,7 +102,7 @@ public abstract class BaseListAdapter<Data, Holder extends BaseListViewHolder> e
                     @Override
                     public void run() {
                         for (int i = 0; i < size; i++) {
-                            data.add(items.get(i));
+                            mDatas.add(items.get(i));
                         }
                     }
                 }).subscribe(new Action1<Object>() {
@@ -112,9 +114,9 @@ public abstract class BaseListAdapter<Data, Holder extends BaseListViewHolder> e
     }
 
     public void addOrUpdate(Data item) {
-        int i = data.indexOf(item);
+        int i = mDatas.indexOf(item);
         if (i >= 0) {
-            data.set(i, item);
+            mDatas.set(i, item);
             notifyDataSetChanged();
         } else {
             add(item);
@@ -129,9 +131,9 @@ public abstract class BaseListAdapter<Data, Holder extends BaseListViewHolder> e
                     public void run() {
                         for (int i = 0; i < size; i++) {
                             Data item = items.get(i);
-                            int x = data.indexOf(item);
+                            int x = mDatas.indexOf(item);
                             if (x >= 0) {
-                                data.set(x, item);
+                                mDatas.set(x, item);
                             } else {
                                 add(item);
                             }
@@ -146,19 +148,19 @@ public abstract class BaseListAdapter<Data, Holder extends BaseListViewHolder> e
     }
 
     public void remove(int position) {
-        if (position >= 0 && position < data.size()) {
-            data.remove(position);
+        if (position >= 0 && position < mDatas.size()) {
+            mDatas.remove(position);
             notifyDataSetChanged();
         }
     }
 
     public void remove(Data item) {
-        int position = data.indexOf(item);
+        int position = mDatas.indexOf(item);
         remove(position);
     }
 
     public void clear() {
-        data.clear();
+        mDatas.clear();
         notifyDataSetChanged();
     }
 }

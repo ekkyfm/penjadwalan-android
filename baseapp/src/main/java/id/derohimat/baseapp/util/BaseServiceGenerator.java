@@ -1,5 +1,6 @@
 package id.derohimat.baseapp.util;
 
+
 import org.json.JSONObject;
 
 import retrofit.ErrorHandler;
@@ -8,6 +9,7 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.converter.GsonConverter;
 import retrofit.mime.TypedByteArray;
+
 
 /**
  * Created on : 05-03-2016
@@ -25,7 +27,9 @@ public class BaseServiceGenerator {
                 .setRequestInterceptor(new RequestInterceptor() {
                     @Override
                     public void intercept(RequestFacade request) {
-                        request.addHeader("Authorization", "Token token=VrlpjCYILseTFuBbRtVN2w");
+                        request.addHeader("Content-Type", "application/json");
+                        request.addHeader("Accept", "application/json");
+//                        request.addHeader("Authorization", "Basic NTZjMzRiYjQxMTM4MzNkZDAxNmU1ZDJlOlZrcFZSTXBKaWthMlFIRVo5OXBnTEN4ank5dWpxeDdE");
                     }
                 })
                 .setErrorHandler(new ErrorHandler() {

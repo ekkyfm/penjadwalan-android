@@ -17,10 +17,11 @@ import id.derohimat.baseapp.ui.BaseActivity;
 /**
  * Created by derohimat on 05/03/16.
  */
-public class SecondActivity extends BaseActivity
-{
-    @Bind(R.id.view_pager) ViewPager viewPager;
-    @Bind(R.id.tab_layout) TabLayout tabLayout;
+public class SecondActivity extends BaseActivity {
+    @Bind(R.id.view_pager)
+    ViewPager viewPager;
+    @Bind(R.id.tab_layout)
+    TabLayout tabLayout;
 
     @Override
     protected int getResourceLayout() {
@@ -28,8 +29,7 @@ public class SecondActivity extends BaseActivity
     }
 
     @Override
-    protected void onViewReady(Bundle savedInstanceState)
-    {
+    protected void onViewReady(Bundle savedInstanceState) {
         List<MyFragment> fragments = Arrays.asList(new MyFragment(), new MyFragment());
         List<String> titles = Arrays.asList("Fragment 1", "Fragment 2");
         MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager(), fragments, titles);

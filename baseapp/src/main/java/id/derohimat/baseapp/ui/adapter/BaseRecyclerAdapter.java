@@ -24,25 +24,25 @@ import timber.log.Timber;
  */
 public abstract class BaseRecyclerAdapter<Data, Holder extends BaseItemViewHolder> extends
         RecyclerView.Adapter<Holder> {
-    protected Context context;
-    protected List<Data> data;
-    protected OnItemClickListener itemClickListener;
-    protected OnLongItemClickListener longItemClickListener;
+    protected Context mContext;
+    protected List<Data> mDatas;
+    protected OnItemClickListener mItemClickListener;
+    protected OnLongItemClickListener mLongItemClickListener;
 
     public BaseRecyclerAdapter(Context context) {
-        this.context = context;
-        data = new ArrayList<>();
+        this.mContext = context;
+        mDatas = new ArrayList<>();
         Timber.tag(getClass().getSimpleName());
     }
 
     public BaseRecyclerAdapter(Context context, List<Data> data) {
-        this.context = context;
-        this.data = data;
+        this.mContext = context;
+        this.mDatas = data;
         Timber.tag(getClass().getSimpleName());
     }
 
     protected View getView(ViewGroup parent, int viewType) {
-        return LayoutInflater.from(context).inflate(getItemResourceLayout(viewType), parent, false);
+        return LayoutInflater.from(mContext).inflate(getItemResourceLayout(viewType), parent, false);
     }
 
     protected abstract int getItemResourceLayout(int viewType);
@@ -52,13 +52,13 @@ public abstract class BaseRecyclerAdapter<Data, Holder extends BaseItemViewHolde
 
     @Override
     public void onBindViewHolder(Holder holder, int position) {
-        holder.bind(data.get(position));
+        holder.bind(mDatas.get(position));
     }
 
     @Override
     public int getItemCount() {
         try {
-            return data.size();
+            return mDatas.size();
         } catch (Exception e) {
             return 0;
         }
@@ -74,7 +74,7 @@ public abstract class BaseRecyclerAdapter<Data, Holder extends BaseItemViewHolde
     }
 
     public void setOnItemClickListener(OnItemClickListener itemClickListener) {
-        this.itemClickListener = itemClickListener;
+        this.mItemClickListener = itemClickListener;
     }
 
     public interface OnLongItemClickListener {
@@ -82,20 +82,24 @@ public abstract class BaseRecyclerAdapter<Data, Holder extends BaseItemViewHolde
     }
 
     public void setOnLongItemClickListener(OnLongItemClickListener longItemClickListener) {
-        this.longItemClickListener = longItemClickListener;
+        this.mLongItemClickListener = longItemClickListener;
     }
 
-    public List<Data> getData() {
-        return data;
+    public List<Data> getDatas() {
+        return mDatas;
     }
 
     public void add(Data item) {
-        data.add(item);
-        notifyItemInserted(data.size() - 1);
+        mDatas.add(item);
+        notifyItemInserted(mDatas.size() - 1);
+    }
+
+    public void addAll(List<Data> items) {
+        add(items);
     }
 
     public void add(Data item, int position) {
-        data.add(position, item);
+        mDatas.add(position, item);
         notifyItemInserted(position);
     }
 
@@ -106,7 +110,7 @@ public abstract class BaseRecyclerAdapter<Data, Holder extends BaseItemViewHolde
                     @Override
                     public void run() {
                         for (int i = 0; i < size; i++) {
-                            data.add(items.get(i));
+                            mDatas.add(items.get(i));
                         }
                     }
                 }).subscribe(new Action1<Object>() {
@@ -118,9 +122,9 @@ public abstract class BaseRecyclerAdapter<Data, Holder extends BaseItemViewHolde
     }
 
     public void addOrUpdate(Data item) {
-        int i = data.indexOf(item);
+        int i = mDatas.indexOf(item);
         if (i >= 0) {
-            data.set(i, item);
+            mDatas.set(i, item);
             notifyItemChanged(i);
         } else {
             add(item);
@@ -135,9 +139,9 @@ public abstract class BaseRecyclerAdapter<Data, Holder extends BaseItemViewHolde
                     public void run() {
                         for (int i = 0; i < size; i++) {
                             Data item = items.get(i);
-                            int x = data.indexOf(item);
+                            int x = mDatas.indexOf(item);
                             if (x >= 0) {
-                                data.set(x, item);
+                                mDatas.set(x, item);
                             } else {
                                 add(item);
                             }
@@ -152,19 +156,19 @@ public abstract class BaseRecyclerAdapter<Data, Holder extends BaseItemViewHolde
     }
 
     public void remove(int position) {
-        if (position >= 0 && position < data.size()) {
-            data.remove(position);
+        if (position >= 0 && position < mDatas.size()) {
+            mDatas.remove(position);
             notifyItemRemoved(position);
         }
     }
 
     public void remove(Data item) {
-        int position = data.indexOf(item);
+        int position = mDatas.indexOf(item);
         remove(position);
     }
 
     public void clear() {
-        data.clear();
+        mDatas.clear();
         notifyDataSetChanged();
     }
 }

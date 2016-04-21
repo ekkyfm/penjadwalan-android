@@ -3,8 +3,9 @@ package id.derohimat.baseapp.ui.view;
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 /**
  * Created on : 05-03-2016
@@ -14,7 +15,7 @@ import android.util.AttributeSet;
  * GitHub     : https://github.com/derohimat
  * LinkedIn   : https://www.linkedin.com/in/derohimat
  */
-public class BaseRecyclerView extends RecyclerView {
+public class BaseRecyclerView extends XRecyclerView {
     public BaseRecyclerView(Context context) {
         super(context);
     }

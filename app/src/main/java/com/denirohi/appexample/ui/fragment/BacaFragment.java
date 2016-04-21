@@ -21,11 +21,12 @@ import timber.log.Timber;
  */
 public class BacaFragment extends BaseFragment<Berita> implements BeritaPresenter.View {
     private BeritaPresenter beritaPresenter;
-    @Bind(R.id.text) TextView textView;
+    @Bind(R.id.text)
+    TextView textView;
 
     @Override
     protected int getResourceLayout() {
-        return R.layout.fragment_my;
+        return R.layout.fragment_baca;
     }
 
     @Override
@@ -44,7 +45,7 @@ public class BacaFragment extends BaseFragment<Berita> implements BeritaPresente
         }
 
         if (savedInstanceState == null) {
-            beritaPresenter.loadBerita(data.getAlamat());
+            beritaPresenter.loadBerita(mData.getAlamat());
         } else {
             beritaPresenter.loadState(savedInstanceState);
         }
@@ -54,7 +55,7 @@ public class BacaFragment extends BaseFragment<Berita> implements BeritaPresente
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser && isResumed()) {
-            getSupportActionBar().setTitle(data.getJudul());
+            getSupportActionBar().setTitle(mData.getJudul());
         }
     }
 
@@ -80,7 +81,7 @@ public class BacaFragment extends BaseFragment<Berita> implements BeritaPresente
     }
 
     @Override
-    public void showLoading() {
+    public void showLoading(boolean isRefresh) {
 
     }
 

@@ -14,7 +14,7 @@ import rx.subjects.Subject;
  * LinkedIn   : https://www.linkedin.com/in/derohimat
  */
 public enum BaseBus {
-    HARVEST;
+    BASE_APP;
     private final Subject<Object, Object> bus;
 
     BaseBus() {
@@ -22,7 +22,7 @@ public enum BaseBus {
     }
 
     public static BaseBus pluck() {
-        return HARVEST;
+        return BASE_APP;
     }
 
     public void send(Object o) {

@@ -6,7 +6,7 @@ import com.denirohi.appexample.ui.fragment.BacaFragment;
 
 import java.util.List;
 
-import id.derohimat.baseapp.ui.adapter.BasePagerAdapter;
+import net.derohimat.baseapp.ui.adapter.BasePagerAdapter;
 
 /**
  * Created by derohimat on 05/03/16.

@@ -25,7 +25,7 @@ import com.denirohi.appexample.ui.adapter.viewholder.BeritaListHolder;
 
 import java.util.List;
 
-import id.derohimat.baseapp.ui.adapter.BaseListAdapter;
+import net.derohimat.baseapp.ui.adapter.BaseListAdapter;
 
 /**
  * Created by derohimat on 05/03/16.

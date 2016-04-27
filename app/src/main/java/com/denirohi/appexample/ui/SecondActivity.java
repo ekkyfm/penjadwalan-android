@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import butterknife.Bind;
-import id.derohimat.baseapp.ui.BaseActivity;
+import net.derohimat.baseapp.ui.BaseActivity;
 
 /**
  * Created by derohimat on 05/03/16.

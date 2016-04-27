@@ -23,7 +23,7 @@ import com.denirohi.appexample.R;
 import com.denirohi.appexample.data.model.Berita;
 import com.denirohi.appexample.ui.adapter.viewholder.BeritaHolder;
 
-import id.derohimat.baseapp.ui.adapter.BaseRecyclerAdapter;
+import net.derohimat.baseapp.ui.adapter.BaseRecyclerAdapter;
 
 /**
  * Created by derohimat on 05/03/16.

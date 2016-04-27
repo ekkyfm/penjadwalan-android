@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.denirohi.appexample.R;
 
 import butterknife.Bind;
-import id.derohimat.baseapp.ui.fragment.BaseFragment;
+import net.derohimat.baseapp.ui.fragment.BaseFragment;
 
 /**
  * Created by derohimat on 05/03/16.

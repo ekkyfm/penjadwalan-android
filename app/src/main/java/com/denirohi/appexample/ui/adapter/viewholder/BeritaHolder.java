@@ -7,8 +7,8 @@ import com.denirohi.appexample.R;
 import com.denirohi.appexample.data.model.Berita;
 
 import butterknife.Bind;
-import id.derohimat.baseapp.ui.adapter.BaseRecyclerAdapter;
-import id.derohimat.baseapp.ui.adapter.viewholder.BaseItemViewHolder;
+import net.derohimat.baseapp.ui.adapter.BaseRecyclerAdapter;
+import net.derohimat.baseapp.ui.adapter.viewholder.BaseItemViewHolder;
 
 /**
  * Created by derohimat on 05/03/16.

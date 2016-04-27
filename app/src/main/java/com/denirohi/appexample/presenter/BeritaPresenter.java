@@ -8,9 +8,9 @@ import com.denirohi.appexample.data.model.Berita;
 import java.util.ArrayList;
 import java.util.List;
 
-import id.derohimat.baseapp.presenter.BasePresenter;
-import id.derohimat.baseapp.util.BaseScheduler;
-import id.derohimat.baseapp.util.BaseWorker;
+import net.derohimat.baseapp.presenter.BasePresenter;
+import net.derohimat.baseapp.util.BaseScheduler;
+import net.derohimat.baseapp.util.BaseWorker;
 import timber.log.Timber;
 
 /**

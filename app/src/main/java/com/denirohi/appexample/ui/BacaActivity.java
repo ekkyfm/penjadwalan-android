@@ -9,12 +9,13 @@ import com.denirohi.appexample.ui.adapter.BacaPagerAdapter;
 import com.denirohi.appexample.ui.fragment.BacaFragment;
 import com.trello.rxlifecycle.ActivityEvent;
 
+import net.derohimat.baseapp.ui.BaseActivity;
+import net.derohimat.baseapp.util.BaseBus;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
-import id.derohimat.baseapp.ui.BaseActivity;
-import id.derohimat.baseapp.util.BaseBus;
 import timber.log.Timber;
 
 /**

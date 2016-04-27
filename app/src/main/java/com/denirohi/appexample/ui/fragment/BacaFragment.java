@@ -2,6 +2,7 @@ package com.denirohi.appexample.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.widget.TextView;
 
 import com.denirohi.appexample.R;
@@ -9,11 +10,12 @@ import com.denirohi.appexample.data.model.Berita;
 import com.denirohi.appexample.presenter.BeritaPresenter;
 import com.trello.rxlifecycle.FragmentEvent;
 
+import net.derohimat.baseapp.ui.fragment.BaseFragment;
+import net.derohimat.baseapp.util.BaseBus;
+
 import java.util.List;
 
 import butterknife.Bind;
-import id.derohimat.baseapp.ui.fragment.BaseFragment;
-import id.derohimat.baseapp.util.BaseBus;
 import timber.log.Timber;
 
 /**
@@ -67,7 +69,7 @@ public class BacaFragment extends BaseFragment<Berita> implements BeritaPresente
     @Override
     public void showBerita(Berita berita) {
         BaseBus.pluck().send("Show " + berita.getJudul());
-        textView.setText(berita.getIsi());
+        textView.setText(Html.fromHtml(berita.getIsi()));
     }
 
     @Override

@@ -24,7 +24,7 @@ import com.denirohi.appexample.data.model.Berita;
 import com.jakewharton.rxbinding.widget.RxTextView;
 
 import butterknife.Bind;
-import id.derohimat.baseapp.ui.adapter.viewholder.BaseListViewHolder;
+import net.derohimat.baseapp.ui.adapter.viewholder.BaseListViewHolder;
 import timber.log.Timber;
 
 /**

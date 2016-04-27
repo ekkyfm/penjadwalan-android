@@ -19,10 +19,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
-import id.derohimat.baseapp.ui.BaseActivity;
-import id.derohimat.baseapp.ui.view.BaseRecyclerView;
-import id.derohimat.baseapp.util.BaseBus;
-import id.derohimat.baseapp.util.BaseWorker;
+import net.derohimat.baseapp.ui.BaseActivity;
+import net.derohimat.baseapp.ui.view.BaseRecyclerView;
+import net.derohimat.baseapp.util.BaseBus;
+import net.derohimat.baseapp.util.BaseWorker;
 import timber.log.Timber;
 
 /**

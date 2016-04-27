@@ -4,16 +4,16 @@ import com.denirohi.appexample.data.model.Berita;
 
 import java.util.List;
 
-import id.derohimat.baseapp.util.BaseServiceGenerator;
-import retrofit.http.GET;
-import retrofit.http.Query;
+import net.derohimat.baseapp.util.BaseServiceGenerator;
+import retrofit2.http.GET;
+import retrofit2.http.Query;
 import rx.Observable;
 
 /**
  * Created by derohimat on 05/03/16.
  */
 public enum TaniPediaService {
-    HARVEST;
+    SERVICE;
     private final Api api;
 
     TaniPediaService() {
@@ -21,7 +21,7 @@ public enum TaniPediaService {
     }
 
     public static TaniPediaService pluck() {
-        return HARVEST;
+        return SERVICE;
     }
 
     public Api getApi() {

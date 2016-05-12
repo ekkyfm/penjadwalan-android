@@ -6,12 +6,10 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-
 /**
  * Created by ekky on 06/05/16.
  */
-public class ApiResponse<T> extends ArrayList<Parcelable> implements Parcelable {
+public class ApiResponse<T> implements Parcelable {
     @SerializedName("success")
     @Expose
     private Integer success;
@@ -25,7 +23,7 @@ public class ApiResponse<T> extends ArrayList<Parcelable> implements Parcelable 
     @Expose
     private Data<T> data;
 
-    protected ApiResponse(Data data){
+    protected ApiResponse(Data data) {
         this.data = data;
     }
 
@@ -46,63 +44,49 @@ public class ApiResponse<T> extends ArrayList<Parcelable> implements Parcelable 
     };
 
     /**
-     *
-     * @return
-     * The success
+     * @return The success
      */
     public Integer getSuccess() {
         return success;
     }
 
     /**
-     *
-     * @param success
-     * The success
+     * @param success The success
      */
     public void setSuccess(Integer success) {
         this.success = success;
     }
 
     /**
-     *
-     * @return
-     * The message
+     * @return The message
      */
     public String getMessage() {
         return message;
     }
 
     /**
-     *
-     * @param message
-     * The message
+     * @param message The message
      */
     public void setMessage(String message) {
         this.message = message;
     }
 
     /**
-     *
-     * @return
-     * The totalCount
+     * @return The totalCount
      */
     public Integer getTotalCount() {
         return totalCount;
     }
 
     /**
-     *
-     * @param totalCount
-     * The totalCount
+     * @param totalCount The totalCount
      */
     public void setTotalCount(Integer totalCount) {
         this.totalCount = totalCount;
     }
 
     /**
-     *
-     * @return
-     * The data
+     * @return The data
      */
     public Data<T> getData() {
         return data;

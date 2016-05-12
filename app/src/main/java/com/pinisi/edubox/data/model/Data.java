@@ -6,9 +6,6 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by ekky on 07/05/16.
  */
@@ -23,7 +20,6 @@ public class    Data<T> implements Parcelable {
     @SerializedName("result")
     @Expose
     private T result;
-
 
     public Data() {
     }

@@ -8,15 +8,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.pinisi.edubox.R;
-import com.pinisi.edubox.data.api.PinisiService;
-import com.pinisi.edubox.data.model.ApiResponse;
 import com.pinisi.edubox.data.model.School;
 import com.pinisi.edubox.presenter.SchoolPresenter;
 import com.trello.rxlifecycle.ActivityEvent;
 
 import net.derohimat.baseapp.ui.BaseActivity;
 import net.derohimat.baseapp.util.BaseBus;
-import net.derohimat.baseapp.util.BaseScheduler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,9 +31,6 @@ public class SelectSchoolActivity extends BaseActivity implements AdapterView.On
     Spinner mSpSekolah;
     ArrayAdapter<String> dataAdapter;
 
-    private ApiResponse<List<List<School>>> apiResponse;
-
-
     @Override
     protected int getResourceLayout() {
         return R.layout.activity_select_school;
@@ -49,22 +43,7 @@ public class SelectSchoolActivity extends BaseActivity implements AdapterView.On
                 .compose(bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(o -> Timber.d(o.toString()), throwable -> Timber.d(throwable.getMessage()));
 
-        PinisiService.pluck()
-                .getApi()
-                .getAllSchool()
-                .compose(BaseScheduler.pluck().applySchedulers(BaseScheduler.Type.COMPUTATION))
-                .subscribe(apiResponse -> {
-                            this.apiResponse = apiResponse;
-                            setAdapter(apiResponse.getData().getResult().get(0));
-                                                                                                                  Timber.d(apiResponse.getData().getResult().get(0).toString());
-                        }, throwable -> {
-                            Timber.d(throwable.getMessage());
-                            Timber.d("Error");
-                        }
-                );
-
-       setUpController(savedInstanceState);
-
+        setUpController(savedInstanceState);
     }
 
     @OnClick(R.id.btn_login)
@@ -79,7 +58,6 @@ public class SelectSchoolActivity extends BaseActivity implements AdapterView.On
             schoolPresenter = new SchoolPresenter(this);
         }
 
-
         if (savedInstanceState != null) {
             schoolPresenter.loadState(savedInstanceState);
         } else {
@@ -90,7 +68,7 @@ public class SelectSchoolActivity extends BaseActivity implements AdapterView.On
     public void setAdapter(List<School> schools) {
         List<String> schoolName = new ArrayList<>();
         Timber.d("");
-        for(School school :schools){
+        for (School school : schools) {
             schoolName.add(school.getSchoolName());
         }
 
@@ -98,8 +76,6 @@ public class SelectSchoolActivity extends BaseActivity implements AdapterView.On
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSpSekolah.setAdapter(dataAdapter);
         Timber.d("set adapter");
-
-
     }
 
     @Override
@@ -109,7 +85,7 @@ public class SelectSchoolActivity extends BaseActivity implements AdapterView.On
 
     @Override
     public void showList(List<School> schools) {
-
+        setAdapter(schools);
     }
 
     @Override

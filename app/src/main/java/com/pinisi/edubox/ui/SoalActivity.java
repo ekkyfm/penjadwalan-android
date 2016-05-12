@@ -18,7 +18,7 @@ import timber.log.Timber;
 /**
  * Created by derohimat on 05/03/16.
  */
-public class SoalActivity extends BaseActivity{
+public class SoalActivity extends BaseActivity {
     @Bind(R.id.reveal_items)
     LinearLayout mRevealView;
 //    @Bind(R.id.gv_nomor)
@@ -36,7 +36,7 @@ public class SoalActivity extends BaseActivity{
         BaseBus.pluck()
                 .receive()
                 .compose(bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe(o -> Timber.d("from MainActivity : " + o.toString()));
+                .subscribe(o -> Timber.d("from SoalActivity : " + o.toString()));
 //        gridViewConfig();
         mRevealView.setVisibility(View.GONE);
         hidden = true;
@@ -55,12 +55,12 @@ public class SoalActivity extends BaseActivity{
         int id = item.getItemId();
         switch (id) {
             case R.id.action_settings:
-                if (hidden == true){
+                if (hidden == true) {
                     mRevealView.setVisibility(View.VISIBLE);
-                    hidden=false;
-                }else if(hidden==false){
+                    hidden = false;
+                } else if (hidden == false) {
                     mRevealView.setVisibility(View.GONE);
-                    hidden=true;
+                    hidden = true;
                 }
                 break;
         }

@@ -6,7 +6,7 @@ android {
     buildToolsVersion '23.0.3'
 
     defaultConfig {
-        applicationId "com.denirohi.appexample"
+        applicationId "com.pinisi.edubox"
         minSdkVersion 17
         targetSdkVersion 23
         versionCode 1
@@ -14,7 +14,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -27,6 +27,9 @@ android {
 buildscript {
     repositories {
         mavenCentral()
+        maven {
+            url "https://jitpack.io"
+        }
     }
     dependencies {
         classpath 'me.tatarka:gradle-retrolambda:3.2.5'
@@ -35,6 +38,9 @@ buildscript {
 
 repositories {
     mavenCentral()
+    maven {
+        url "https://jitpack.io"
+    }
 }
 
 retrolambda {
@@ -45,4 +51,8 @@ dependencies {
     compile project(':baseapp')
     compile fileTree(include: ['*.jar'], dir: 'libs')
     retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:2.1.0'
+    compile ('com.github.ozodrukh:CircularReveal:1.3.1@aar') {
+        transitive = true;
+    }
+    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
 }

@@ -16,5 +16,6 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/view_padding"
             android:textSize="@dimen/textNormal"/>
+
     </ScrollView>
 </LinearLayout>

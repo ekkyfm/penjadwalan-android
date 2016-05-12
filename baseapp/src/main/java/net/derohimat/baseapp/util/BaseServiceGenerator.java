@@ -25,11 +25,11 @@ public class BaseServiceGenerator {
 
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         // set your desired log level
-        if (BuildConfig.DEBUG) {
+//        if (BuildConfig.DEBUG) {
             logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-        } else {
-            logging.setLevel(HttpLoggingInterceptor.Level.NONE);
-        }
+//        } else {
+//            logging.setLevel(HttpLoggingInterceptor.Level.NONE);
+//        }
 
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         // add logging as last interceptor

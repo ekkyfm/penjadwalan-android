@@ -1,29 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    package="com.denirohi.appexample"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.pinisi.edubox">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".TesApplication"
+        android:name="com.pinisi.edubox.TesApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppBaseTheme">
+        android:theme="@style/AppBaseThemeNoActionBar">
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.MainActivity2"
             android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
 
-        <activity android:name=".ui.SecondActivity"/>
+        <activity android:name="com.pinisi.edubox.ui.SecondActivity" />
 
-        <activity android:name=".ui.BacaActivity"/>
+        <activity android:name="com.pinisi.edubox.ui.MainActivity" />
+
+        <activity android:name=".ui.BacaActivity"></activity>
+
+        <activity android:name="com.pinisi.edubox.ui.SoalActivity" />
+
+        <activity android:name="com.pinisi.edubox.ui.LoginActivity">
+
+        </activity>
+
+        <activity android:name="com.pinisi.edubox.ui.SelectSchoolActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
     </application>
 
 </manifest>

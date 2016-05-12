@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.pinisi.edubox.R;
+import com.pinisi.edubox.data.api.PinisiService;
 import com.pinisi.edubox.data.model.ApiResponse;
 import com.pinisi.edubox.data.model.Quiz;
 import com.pinisi.edubox.presenter.QuizPresenter;
@@ -13,6 +14,7 @@ import com.trello.rxlifecycle.FragmentEvent;
 import net.derohimat.baseapp.ui.fragment.BaseFragment;
 import net.derohimat.baseapp.ui.view.BaseRecyclerView;
 import net.derohimat.baseapp.util.BaseBus;
+import net.derohimat.baseapp.util.BaseScheduler;
 
 import java.util.List;
 
@@ -26,7 +28,7 @@ public class QuizMainFragment extends BaseFragment<Quiz> implements QuizPresente
     private QuizPresenter quizPresenter;
     @Bind(R.id.rv_ujian)
     BaseRecyclerView mRvUjian;
-    ApiResponse<Quiz> apiResponse;
+    ApiResponse<List<Quiz>> apiResponse;
 
     QuizRecyclerAdapter adapter;
 
@@ -41,6 +43,19 @@ public class QuizMainFragment extends BaseFragment<Quiz> implements QuizPresente
                 .receive()
                 .compose(bindUntilEvent(FragmentEvent.DESTROY))
                 .subscribe(o -> Timber.d("from BacaFragment : " + o.toString()));
+
+        PinisiService.pluck()
+                .getApi()
+                .getAllQuiz()
+                .compose(BaseScheduler.pluck().applySchedulers(BaseScheduler.Type.COMPUTATION))
+                .subscribe(apiResponse -> {
+                            this.apiResponse = apiResponse;
+                            Timber.d(apiResponse.getData().getResult().get(0).toString());
+                        }, throwable -> {
+                            Timber.d(throwable.getMessage());
+                            Timber.d("Error");
+                        }
+                );
     }
 
     public void setUpController(Bundle savedInstanceState){

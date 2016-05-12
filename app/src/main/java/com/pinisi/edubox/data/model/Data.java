@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by ekky on 07/05/16.
  */
-public class Data<T> implements Parcelable {
+public class    Data<T> implements Parcelable {
 
     @SerializedName("totalPage")
     @Expose

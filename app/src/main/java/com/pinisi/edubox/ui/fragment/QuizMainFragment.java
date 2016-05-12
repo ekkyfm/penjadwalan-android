@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.pinisi.edubox.R;
-import com.pinisi.edubox.data.model.ApiResponse;
 import com.pinisi.edubox.data.model.Quiz;
 import com.pinisi.edubox.presenter.QuizPresenter;
 import com.pinisi.edubox.ui.adapter.QuizRecyclerAdapter;
@@ -26,7 +25,6 @@ public class QuizMainFragment extends BaseFragment<Quiz> implements QuizPresente
     private QuizPresenter quizPresenter;
     @Bind(R.id.rv_ujian)
     BaseRecyclerView mRvUjian;
-    ApiResponse<Quiz> apiResponse;
 
     QuizRecyclerAdapter adapter;
 
@@ -40,23 +38,25 @@ public class QuizMainFragment extends BaseFragment<Quiz> implements QuizPresente
         BaseBus.pluck()
                 .receive()
                 .compose(bindUntilEvent(FragmentEvent.DESTROY))
-                .subscribe(o -> Timber.d("from BacaFragment : " + o.toString()));
+                .subscribe(o -> Timber.d("from QuizMainFragment : " + o.toString()));
+
+        setUpController(savedInstanceState);
     }
 
-    public void setUpController(Bundle savedInstanceState){
-        if(quizPresenter==null){
+    public void setUpController(Bundle savedInstanceState) {
+        if (quizPresenter == null) {
             quizPresenter = new QuizPresenter(this);
         }
-        if(savedInstanceState==null){
+        if (savedInstanceState == null) {
             quizPresenter.loadListQuiz();
 
-        }else{
+        } else {
             quizPresenter.loadState(savedInstanceState);
         }
     }
 
 
-    public void setUpRecycler(){
+    public void setUpRecycler() {
 
     }
 

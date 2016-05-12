@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import com.pinisi.edubox.data.api.PinisiService;
 import com.pinisi.edubox.data.model.ApiResponse;
 import com.pinisi.edubox.data.model.Quiz;
+
 import net.derohimat.baseapp.presenter.BasePresenter;
 import net.derohimat.baseapp.util.BaseScheduler;
 import net.derohimat.baseapp.util.BaseWorker;
@@ -66,14 +67,14 @@ public class QuizPresenter extends BasePresenter<QuizPresenter.View> {
     public void saveState(Bundle bundle) {
         bundle.putParcelableArrayList("listQuiz", (ArrayList<? extends Parcelable>) apiResponse.getData().getResult());
         bundle.putParcelable("quiz", quiz);
-        bundle.putParcelable("apiResponse",apiResponse);
+        bundle.putParcelable("apiResponse", apiResponse);
     }
 
     @Override
     public void loadState(Bundle bundle) {
-        apiResponse =  bundle.getParcelable("apiResponse");
+        apiResponse = bundle.getParcelable("apiResponse");
         if (apiResponse != null) {
-            mView.showListQuiz((List<Quiz>) apiResponse.getData().getResult());
+            mView.showListQuiz(apiResponse.getData().getResult());
         } else {
             mView.showError(new Throwable("Error"));
         }
@@ -83,7 +84,8 @@ public class QuizPresenter extends BasePresenter<QuizPresenter.View> {
     public interface View extends BasePresenter.View {
 
         void showListQuiz(List<Quiz> quizs);
-//        void showQuiz(Quiz quiz);
+
+        //        void showQuiz(Quiz quiz);
         void showSomeThing();
 
 

@@ -1,8 +1,9 @@
 package net.derohimat.baseapp.util;
 
+import net.derohimat.baseapp.BuildConfig;
+
 import java.io.IOException;
 
-import net.derohimat.baseapp.BuildConfig;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -25,11 +26,11 @@ public class BaseServiceGenerator {
 
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         // set your desired log level
-//        if (BuildConfig.DEBUG) {
+        if (BuildConfig.DEBUG) {
             logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-//        } else {
-//            logging.setLevel(HttpLoggingInterceptor.Level.NONE);
-//        }
+        } else {
+            logging.setLevel(HttpLoggingInterceptor.Level.NONE);
+        }
 
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         // add logging as last interceptor

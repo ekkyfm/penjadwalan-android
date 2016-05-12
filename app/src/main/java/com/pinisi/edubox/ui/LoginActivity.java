@@ -28,8 +28,7 @@ public class LoginActivity extends BaseActivity {
     @Bind(R.id.tv_password)
     TextView mTvPassword;
 
-    Auth auth;
-
+    private Auth mAuth;
 
     @Override
     protected int getResourceLayout() {
@@ -45,32 +44,27 @@ public class LoginActivity extends BaseActivity {
     }
 
     @OnClick(R.id.btn_lanjut)
-    public void lanjut(){
-        Intent intent = new Intent(getApplicationContext(),SelectSchoolActivity.class);
-
+    public void lanjut() {
         PinisiService.pluck()
                 .getApi()
                 .getAuth(mTvUsername.getText().toString(), mTvPassword.getText().toString())
                 .compose(BaseScheduler.pluck().applySchedulers(BaseScheduler.Type.COMPUTATION))
                 .subscribe(auth -> {
-                    this.auth = auth;
+                    this.mAuth = auth;
                     loginCheck(auth);
-
                 }, throwable -> {
                     Timber.d(throwable.getMessage());
                 });
 
     }
 
-    public void loginCheck(Auth auth){
-        if(auth.getError().equals("FALSE")){
-            Intent intent = new Intent(getApplicationContext(),SelectSchoolActivity.class);
+    public void loginCheck(Auth auth) {
+        if (auth.getError().equals("FALSE")) {
+            Intent intent = new Intent(getApplicationContext(), SelectSchoolActivity.class);
             startActivity(intent);
             finish();
-        }else{
-            Toast.makeText(getApplicationContext(), auth.getMsg(),Toast.LENGTH_SHORT);
+        } else {
+            Toast.makeText(getApplicationContext(), auth.getMsg(), Toast.LENGTH_SHORT).show();
         }
     }
-
-
 }

@@ -44,7 +44,6 @@ public class SchoolPresenter extends BasePresenter<SchoolPresenter.View> {
                             mView.showError(throwable);
                         }
                 );
-
     }
 
 
@@ -74,7 +73,7 @@ public class SchoolPresenter extends BasePresenter<SchoolPresenter.View> {
 
     @Override
     public void loadState(Bundle bundle) {
-        apiResponse =  bundle.getParcelable("apiResponse");
+        apiResponse = bundle.getParcelable("apiResponse");
         if (apiResponse != null) {
             mView.showList(apiResponse.getData().getResult().get(0));
         } else {

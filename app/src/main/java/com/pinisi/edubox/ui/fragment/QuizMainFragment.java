@@ -3,6 +3,7 @@ package com.pinisi.edubox.ui.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.pinisi.edubox.R;
 import com.pinisi.edubox.data.model.Quiz;
 import com.pinisi.edubox.presenter.QuizPresenter;
@@ -21,12 +22,13 @@ import timber.log.Timber;
 /**
  * Created by derohimat on 05/03/16.
  */
-public class QuizMainFragment extends BaseFragment<Quiz> implements QuizPresenter.View {
-    private QuizPresenter quizPresenter;
-    @Bind(R.id.rv_ujian)
-    BaseRecyclerView mRvUjian;
+public class QuizMainFragment extends BaseFragment implements QuizPresenter.View {
 
-    QuizRecyclerAdapter adapter;
+    @Bind(R.id.rv_ujian)
+    BaseRecyclerView mRecyclerView;
+
+    private QuizPresenter mPresenter;
+    private QuizRecyclerAdapter mAdapter;
 
     @Override
     protected int getResourceLayout() {
@@ -40,34 +42,59 @@ public class QuizMainFragment extends BaseFragment<Quiz> implements QuizPresente
                 .compose(bindUntilEvent(FragmentEvent.DESTROY))
                 .subscribe(o -> Timber.d("from QuizMainFragment : " + o.toString()));
 
+        setUpAdapter();
+        setUpRecycler();
         setUpController(savedInstanceState);
     }
 
     public void setUpController(Bundle savedInstanceState) {
-        if (quizPresenter == null) {
-            quizPresenter = new QuizPresenter(this);
+        if (mPresenter == null) {
+            mPresenter = new QuizPresenter(this);
         }
-        if (savedInstanceState == null) {
-            quizPresenter.loadListQuiz();
 
+        if (savedInstanceState == null) {
+            mPresenter.loadListQuiz();
         } else {
-            quizPresenter.loadState(savedInstanceState);
+            mPresenter.loadState(savedInstanceState);
         }
     }
 
-
     public void setUpRecycler() {
+        mRecyclerView.setUpAsList();
+        mRecyclerView.setAdapter(mAdapter);
 
+        mRecyclerView.setLoadingMoreEnabled(false);
+        mRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                mPresenter.loadListQuiz();
+            }
+
+            @Override
+            public void onLoadMore() {
+
+            }
+        });
+    }
+
+    private void setUpAdapter() {
+        mAdapter = new QuizRecyclerAdapter(mContext);
+
+        mAdapter.setOnItemClickListener((view, position) -> {
+            Quiz quiz = mAdapter.getDatas().get(position - 1);
+            //TODO : pindah ke activity detail Quiz
+        });
     }
 
     @Override
     public void showListQuiz(List<Quiz> quizs) {
+        mAdapter.addAll(quizs);
 
+        mRecyclerView.refreshComplete();
     }
 
-
     @Override
-    public void showSomeThing() {
+    public void showQuiz(Quiz quiz) {
 
     }
 

@@ -44,7 +44,6 @@ public class SelectSchoolActivity extends BaseActivity implements AdapterView.On
                 .subscribe(o -> Timber.d(o.toString()), throwable -> Timber.d(throwable.getMessage()));
 
         setUpController(savedInstanceState);
-
     }
 
     @OnClick(R.id.btn_login)
